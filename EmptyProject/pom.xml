@@ -8,10 +8,54 @@
     <artifactId>EmptyProject</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <developers>
+        <developer>
+            <id>evgeny228</id>
+            <name>Evgeny the Great</name>
+            <email>evegeny.great@mail.astondevs.ru</email>
+            <organization>Aston Education</organization>
+            <url>https://astondevs.ru/</url>
+            <roles>
+                <role>Swing Software Engineer</role>
+                <role>TeachLead Developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>AlexeyGoodGuy</id>
+            <name>Alexey Kuznetsov</name>
+            <email>alex.kuzntetsov@mail.astondevs.ru</email>
+            <organization>Aston Education</organization>
+            <url>https://astondevs.ru/</url>
+            <roles>
+                <role>QA Engineer</role>
+            </roles>
+        </developer>
+    </developers>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.plugin</groupId>
+                <artifactId>MavenPlugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <id>display-dev-info</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>display</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
