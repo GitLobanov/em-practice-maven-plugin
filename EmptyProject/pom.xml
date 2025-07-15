@@ -13,23 +13,33 @@
             <id>evgeny228</id>
             <name>Evgeny the Great</name>
             <email>evegeny.great@mail.astondevs.ru</email>
-            <organization>Aston Education</organization>
             <url>https://astondevs.ru/</url>
+            <organization>Aston Education</organization>
+            <organizationUrl>https://astondevs.ru/</organizationUrl>
             <roles>
                 <role>Swing Software Engineer</role>
                 <role>TeachLead Developer</role>
             </roles>
             <timezone>+1</timezone>
+            <properties>
+                <twitter>evgeny_twitter</twitter>
+                <github>evgeny_github</github>
+            </properties>
         </developer>
         <developer>
             <id>AlexeyGoodGuy</id>
             <name>Alexey Kuznetsov</name>
             <email>alex.kuzntetsov@mail.astondevs.ru</email>
-            <organization>Aston Education</organization>
             <url>https://astondevs.ru/</url>
+            <organization>Aston Education</organization>
+            <organizationUrl>https://astondevs.ru/</organizationUrl>
             <roles>
                 <role>QA Engineer</role>
             </roles>
+            <timezone>UTC+3</timezone>
+            <properties>
+                <linkedin>alexey_linkedin</linkedin>
+            </properties>
         </developer>
     </developers>
 

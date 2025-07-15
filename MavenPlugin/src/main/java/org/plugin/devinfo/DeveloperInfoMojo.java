@@ -1,5 +1,6 @@
 package org.plugin.devinfo;
 
+import org.apache.commons.collections4.*;
 import org.apache.maven.model.*;
 import org.apache.maven.plugin.*;
 import org.apache.maven.plugins.annotations.*;
@@ -61,17 +62,24 @@ public class DeveloperInfoMojo extends AbstractMojo {
      * Displays developer information.
      */
     private void showDevelopers(List<Developer> developers) {
+        if (developers == null || developers.isEmpty()) {
+            getLog().info("No developers information available");
+            return;
+        }
+
         int developerCount = 1;
         for (Developer developer : developers) {
             getLog().info("--- Developer " + developerCount++ + " ---");
-            getLog().info("ID:          " + (developer.getId() != null ? developer.getId() : "N/A"));
-            getLog().info("Name:        " + (developer.getName() != null ? developer.getName() : "N/A"));
-            getLog().info("Email:       " + (developer.getEmail() != null ? developer.getEmail() : "N/A"));
-            getLog().info("Organization: " + (developer.getOrganization() != null ? developer.getOrganization() : "N/A"));
-            getLog().info("URL:         " + (developer.getUrl() != null ? developer.getUrl() : "N/A"));
-            getLog().info("Timezone:    " + (developer.getTimezone() != null ? developer.getTimezone() : "N/A"));
+            getLog().info("ID:          " + Optional.ofNullable(developer.getId()).orElse("N/A"));
+            getLog().info("Name:        " + Optional.ofNullable(developer.getName()).orElse("N/A"));
+            getLog().info("Email:       " + Optional.ofNullable(developer.getEmail()).orElse("N/A"));
+            getLog().info("URL:         " + Optional.ofNullable(developer.getUrl()).orElse("N/A"));
+            getLog().info("Organization: " + Optional.ofNullable(developer.getOrganization()).orElse("N/A"));
+            getLog().info("Org URL:     " + Optional.ofNullable(developer.getOrganizationUrl()).orElse("N/A"));
+            getLog().info("Timezone:    " + Optional.ofNullable(developer.getTimezone()).orElse("N/A"));
 
             showRoles(developer);
+            showProperties(developer);
             getLog().info("");
         }
     }
@@ -80,14 +88,25 @@ public class DeveloperInfoMojo extends AbstractMojo {
      * Displays developer roles.
      */
     private void showRoles(Developer developer) {
-        if (developer.getRoles() != null && !developer.getRoles().isEmpty()) {
+        if (CollectionUtils.isNotEmpty(developer.getRoles())) {
             String roles = developer.getRoles().stream()
                     .map(String::trim)
-                    .filter(s -> !s.isEmpty())
+                    .filter(role -> !role.isEmpty())
                     .collect(Collectors.joining(", "));
             getLog().info("Roles:       " + roles);
         } else {
             getLog().info("Roles:       N/A");
+        }
+    }
+
+    private void showProperties(Developer developer) {
+        if (MapUtils.isNotEmpty(developer.getProperties())) {
+            String props = developer.getProperties().entrySet().stream()
+                    .map(entry -> entry.getKey() + ": " + entry.getValue())
+                    .collect(Collectors.joining(", "));
+            getLog().info("Properties:   " + props);
+        } else {
+            getLog().info("Properties:   N/A");
         }
     }
 }
